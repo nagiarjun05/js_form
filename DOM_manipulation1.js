@@ -52,6 +52,25 @@ const uEmail=document.querySelector('#email');
 myForm.addEventListener('submit', onSubmit);
 
 
+//function to store details into local storage as an object
+function onSubmit(e){
+    e.preventDefault();
+    if (uName.value===''||uEmail.value===''){
+        document.querySelector('.msg').textContent='Please Enter Fields';
+        setTimeout(()=>msg.remove(), 2000);
+    }else {
+        let obj={
+            name:uName.value,
+            email:uEmail.value
+        }
+        let obj_serialized=JSON.stringify(obj);
+        localStorage.setItem("details",obj_serialized);
+    }
+}
+
+
+
+
 
 //Function to add name and email in the Ul list
 // function onSubmit(e){
@@ -72,23 +91,36 @@ myForm.addEventListener('submit', onSubmit);
 //     }
 // };
 
-function onSubmit(e){
-    e.preventDefault();
-    if (uName.value===''||uEmail.value===''){
-        msg.classList.add('error');
-        msg.textContent='Please Enter Fields';
-        setTimeout(()=>msg.remove(), 2000);
-    }else { 
-        localStorage.setItem(`name`,`${uName.value}`);
-        localStorage.setItem(`email`,`${uEmail.value}`);
-        console.log(uName.value)
-        console.log(uEmail.value)
-        uName.value='';
-        uEmail.value='';
 
-    }
-};
-    
+
+//funciton to get store details in session storage
+// function onSubmit(e){
+//     e.preventDefault();
+//     if (uName.value===''||uEmail.value===''){
+//         msg.classList.add('error');
+//         msg.textContent='Please Enter Fields';
+//         setTimeout(()=>msg.remove(), 2000);
+//     }else { 
+//         localStorage.setItem(`name`,`${uName.value}`);
+//         localStorage.setItem(`email`,`${uEmail.value}`);
+//         console.log(uName.value)
+//         console.log(uEmail.value)
+//         uName.value='';
+//         uEmail.value='';
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*const container=document.querySelector('#my-form');
 
@@ -103,4 +135,3 @@ container.addEventListener('mouseover',(e)=>{
 heading.addEventListener('mouseout', (f)=>{
     document.querySelector('body').style.background='#ddd';
 });*/
-
