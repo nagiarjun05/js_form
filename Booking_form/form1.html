@@ -8,22 +8,42 @@
 </head>
 <body>
     <script>
-        var obj={num:4};
-        var addition =function(a){
-            return this.num*a;
-        }    
-        var ab=[2];
-        console.log(addition.call(obj,5));
-        console.log(addition.apply(obj,ab))
-        const res=addition.bind(obj,ab);
-        console.log(res());
+        // var obj={num:4};
+        // var addition =function(a){
+        //     return this.num*a;
+        // }    
+        // var ab=[2];
+        // console.log(addition.call(obj,5));
+        // console.log(addition.apply(obj,ab))
+        // const res=addition.bind(obj,ab);
+        // console.log(res());
 
-        var student={age:18};
-        var printAge=function(){
-            return this.age
+        // var student={age:18};
+        // var printAge=function(){
+        //     return this.age
+        // }
+        // var Print=printAge.bind(student);
+        // console.log(Print());
+        
+        // let multiply=function(x,y){
+        //     console.log(x*y);
+        // }
+        // // let myltiplyByTwo=multiply.bind(this,2);
+        // // myltiplyByTwo(5);
+        // let myltiplyByThree=multiply.bind(this,3);
+        // myltiplyByThree(5);
+        // let myltiplyByTwo=multiply.bind(this,2,3);
+        // myltiplyByTwo(5);
+
+        let multiply=function(x){
+            return function(y){
+                console.log(x*y)
+            }
         }
-        var Print=printAge.bind(student);
-        console.log(Print());
+        let multiplyByTwo=multiply(2);
+        multiplyByTwo(3);
+        let multiplyByThree=multiply(3);
+        multiplyByThree(3);
     </script>
 </body>
 </html>
