@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj={num:4};
+        var addition =function(a){
+            return this.num*a;
+        }    
+        var ab=[2];
+        console.log(addition.call(obj,5));
+        console.log(addition.apply(obj,ab))
+        const res=addition.bind(obj,ab);
+        console.log(res());
+
+        var student={age:18};
+        var printAge=function(){
+            return this.age
+        }
+        var Print=printAge.bind(student);
+        console.log(Print());
+    </script>
+</body>
+</html>
