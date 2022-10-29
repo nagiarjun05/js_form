@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    <button id="onclck">Click Here</button>
     <script>
         // var obj={num:4};
         // var addition =function(a){
@@ -35,15 +36,336 @@
         // let myltiplyByTwo=multiply.bind(this,2,3);
         // myltiplyByTwo(5);
 
-        let multiply=function(x){
-            return function(y){
-                console.log(x*y)
+        // let multiply=function(x){
+        //     return function(y){
+        //         console.log(x*y)
+        //     }
+        // }
+        // let multiplyByTwo=multiply(2);
+        // multiplyByTwo(3);
+        // let multiplyByThree=multiply(3);
+        // multiplyByThree(3);
+
+        // function y(){
+        //     for (let i=1;i<6;i++){
+        //         setTimeout(()=> console.log(i),i*1000)
+        //     }
+        //     console.log('Done Coding')
+        // }
+
+        // const name = (arr)=>{
+        //     let count=0;
+        //     return ()=>{
+        //         console.log("hello "+arr[count])
+        //         count++;
+        //     }
+        // }
+        // let fun = name(["Ram","Shyam"]);
+        // fun()// Print Hello Ram
+        // fun()//print Hello Shyam
+        // 'use strict';
+
+        // function xyz(c){
+        //     return (v) => {
+        //         return () => v+c;
+        //     }
+        // };
+        // const x=xyz(5);
+
+        // console.log(x(2)());
+        
+        
+        //*-'this' inside global scope.
+
+        // this.table='window table';
+        // console.log(this.table):
+
+        
+        //*-'this' inside an object
+
+        // let johnsroom={
+        //     table:"johns table"
+        // };
+        // console.log(johnsroom.table);
+        
+        
+        //*-'this' inside a function
+
+        // const cleanTable=function(soap){
+        //     console.log(`cleaning ${this.table} with ${soap}`)
+        // };
+        
+        // cleanTable("Detol");
+
+        
+        //*-'this' inside a method
+
+        // let johnsroom={
+        //     table:"johns table",
+        //     tableCleaning(){
+        //         console.log(`cleaning ${this.table}`)
+        //     }
+        // };
+        // console.log(johnsroom.table);
+        // johnsroom.tableCleaning();
+
+
+        //*-Use call function with  this
+
+        // this.table='window table';
+        // console.log(this.table);
+        // const cleanTable=function(soap){
+        //     console.log(`cleaning ${this.table}  with ${soap}`)
+        // };
+
+        // cleanTable.call(this,'Detol');
+        
+        //*-'this' inside an inner function
+
+        // const cleanTable=function(soap){
+        //     const inner=function(_soap){
+        //         console.log(`cleaning ${this.table}  with ${_soap}`)
+        //     }
+        //     inner(soap)
+        // };
+
+        // cleanTable.call(this,'Detol');
+
+
+        //*-Use bind function with this
+
+        // let johnsroom={
+        //     table:"johns table"
+        // };
+        // const cleanTable=function(soap){
+        //     const inner=function(_soap){
+        //         console.log(`cleaning ${this.table} with ${_soap}`)
+        //     }
+        //     inner.bind(johnsroom)(soap);
+        // };
+
+        // cleanTable('some soap');
+
+
+        //*-'this' inside a construcor
+
+        // let createRoom=function(name){
+        //     this.table=`${name}s room`
+        // }
+                
+        // createRoom.prototype.cleanTable= function(soap){
+        //     console.log(`cleaning ${this.table}  with ${soap}`)
+        // }
+
+        // const jilisroom = new  createRoom('juli');
+        // jilisroom.cleanTable('Lux');
+        
+        //*-'this' inside a class
+
+        // class createRoom {
+        //     constructor(name){
+        //         this.name=`${name}s room`
+        //     }
+        //     cleanTable(soap){
+        //         console.log(`Cleaning ${this.name} using ${soap}`);
+        //     }
+        // }
+                
+        // const julisRoom= new createRoom('juli');
+        // julisRoom.cleanTable('Detol');
+        
+        class Employee{
+            constructor(ename,salary,design){
+                this.ename=ename;
+                this.salary=salary;
+                this.design=design;
+            }
+            printSalary(){
+                console.log(this.salary);
             }
         }
-        let multiplyByTwo=multiply(2);
-        multiplyByTwo(3);
-        let multiplyByThree=multiply(3);
-        multiplyByThree(3);
+
+        class Age extends Employee{
+
+            constructor(ename,salary,design,age){
+                super(ename,salary,design);
+                this.age = age
+            }
+
+            getAge(){
+                console.log(this.age)
+                console.log(this.ename);
+            }
+
+        }
+        
+        class Dept extends Age{
+            constructor(dpt){
+                super();
+                // super(ename,salary,design);
+                this.dpt=dpt;
+            }
+        }
+
+        var e1= new Dept(12);
+        console.log(e1)
+        e1.getAge()
+        
+    
+
+
+        // const jilisroom = new  createRoom('juli');
+        // jilisroom.cleanTable('Lux');
+        // cleanTable.call(this);
+        // johnsroom.tableCleaning();
+        // this.julis.tableCleaning();
+        // console.log(a);
+        // let a=10;
+        // const b=20;
+        // function(){
+        //     let c=1;
+        //     console.log(c);
+        // }
+        // console.log(a);
+
+        // class createRoom {
+        //     constructor(name){
+        //         this.name=`${name}s room`
+        //     }
+        //     cleanTable(soap){
+        //         console.log(`Cleaning ${this.name} using ${soap}`);
+        //     }
+        // }
+        
+        // const julisRoom= new createRoom('juli');
+        // julisRoom.cleanTable('Detol');
+
+        // class Student{
+        //     static count=0;
+        //     static countInc(){
+        //         return (Student.count++);
+        //     }
+        //     constructor(sname,age,phn,marks){
+        //         this.sname=sname;
+        //         this.phn=phn;
+        //         this.age=age;
+        //         this.marks=marks;
+        //         Student.countInc();
+        //     }
+        //     eligibilityForPlacement(Age_eligibility){
+        //         return (Marks_eligiblity)=>{
+        //             if(this.marks>Marks_eligiblity && this.age>Age_eligibility){
+        //                 console.log(`${this.sname} is eligible for placement`);
+        //             }else {
+        //                 console.log(`${this.sname} is not eligible for placement`);
+        //             }
+        //         }
+        //     }
+        // }
+        // const juli=new Student('juli',25,'758******',55);
+        // const john=new Student('john',29,'964******',37);
+        // const harry=new Student('harry',21,'952******',33);
+        // const mayra=new Student('mayra',23,'988******',80);
+        // const roan=new Student('roan',27,'987******',70);
+        // juli.eligibilityForPlacement(20)(40);
+        // john.eligibilityForPlacement(20)(40);
+        // harry.eligibilityForPlacement(20)(40);
+        // mayra.eligibilityForPlacement(20)(40);
+        // roan.eligibilityForPlacement(20)(40);   ;
+        // "use strict";
+        // var a = 4;
+        // let add= () => a*a;
+        // console.log(add());
+
+        // let mult = (a,b) => a*b;
+        // console.log(mult(2,3));
+
+        // var x =function(){
+        //     var that=this;
+        //     this.val=1;
+        //     setTimeout(function(){
+        //         that.val++;
+        //         console.log(that.val);
+        //     },1)
+        // }
+
+        // var x =function(){
+        //     this.val=1;
+        //     setTimeout(()=>{
+        //         this.val++;
+        //         console.log(this.val);
+        //     },1)
+        // }
+        // var xx= new x();
+
+        // let x=function(){
+        //     console.log(arguments[3])
+        // }
+        // x(1,2,3,4,5);
+
+        // let x = (...n) => console.log(n[2]);
+        // x(1,2,3);
+
+        // setTimeout(()=>console.log("timer1 expired"),1000);
+        // setTimeout(()=>console.log("timer2 expired"),0);
+
+        // function x(y){
+        //     console.log("inside x");
+        //     y();
+
+        // };
+        // x(function y(){
+        //     setTimeout(()=>console.log("inside y"),0)
+        // });
+        
+        // document.getElementById('onclck').addEventListener('click',()=>{
+        //     var a=10;
+        //     console.log('clicked me');
+        // })
+        // this.table='window table'
+        // // window.setTimeout(console.log('Arjun'),5000);
+
+        // let studentObj = {
+        //     'yash': 26,
+        //     'vaibhav': 24,
+        //     'rajesh' : 25,
+        // }
+        // function findaverageage(Obj){
+        //     let count=0;
+        //     let totalAge=0;
+        //     Object.keys(Obj).forEach(key=>{
+        //         totalAge=totalAge+Obj[key]
+        //         count++
+        //     });
+        //     averageAge=totalAge/count;
+        //     return averageAge;
+        // // }
+
+        // var name='arjun';
+        // var info={
+        //     abc:{
+        //         name:'tarun',
+        //         abcd:function (){
+        //         // var name='tarun';
+        //         var printName=function(){
+        //             console.log(this.name)
+        //         }
+        //         abc.printName();          
+        //     }
+        // }
+            
+        // }
+        // info.abc();
+        
+        
+        
+        // var abc={
+        //     x:1,
+        //     y:2
+        // }
+        // console.log(abc.y);
+        // // console.log(this.a);
+        // console.log(findaverageage(studentObj));
     </script>
-</body>
+</body>,
 </html>

@@ -58,11 +58,16 @@ function editDetails(e){
 
 function deleteUser(e){
     e.preventDefault();
+    console.log(e.target.parentElement);
     if(e.target.classList.contains('dltbtn')){
         var li=e.target.parentElement;
         userList.removeChild(li);
-        var temp=li.childNodes[2].data;
-        localStorage.removeItem(`user${temp}`);
+        // var temp=li.childNodes[2].data;
+        var temp = li.childNodes[0];
+        console.log(temp);
+        // localStorage.removeItem(`user${temp}`);
+        // localStorage.removeItem(`${temp}`);
+
     }
 }
 
@@ -75,8 +80,9 @@ function showDetails(e){
         let li;
         li = document.createElement('li')
         li.className='user'
-        Object.values(fetchedDetails).forEach((value) => {
-            li.appendChild(document.createTextNode(value));
+        Object.values(fetchedDetails).forEach((value,index) => {
+            // console.log(fetchedDetails)
+            li.appendChild(document.createTextNode(`${value}`));
         })
         
         var deleteButton=document.createElement('button');
