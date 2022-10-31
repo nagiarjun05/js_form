@@ -80,4 +80,90 @@ function editExpDetails(e){
     }
 }
 
+// class Myqueue{
+//     constructor(){
+//         this.q=[];
+//         this.front=0;
+//         this.rear=0;
+//     }
+
+//     enqueue(item){
+//         this.q.push(item)
+//         this.rear++;
+//         }
+//     dequeue(){
+//         if(this.rear>=this.front){
+//             this.q[this.front]=undefined
+//             this.front++
+//         }else{
+//             console.log("Queue is empty")
+//         }
+//     }
+//     que_rear(){
+//         if(this.rear>=this.front){
+//             console.log(this.q[this.rear-1]);
+//         }else{
+//             console.log("Queue is empty")
+//         }
+//     }
+//     que_front(){
+//         if(this.rear>=this.front){
+//             console.log(this.q[this.front]);
+//         }else{
+//             console.log("Queue is empty")
+//         }
+//     }
+//     isEmpty(){
+//         if (this.rear>=this.front){
+//             console.log(false);
+//         }else {
+//             console.log(true);
+//         }
+//     }
+    
+//     size(){
+//         if(this.rear>this.front){
+//             console.log((this.rear-this.front))
+//         }
+//     }
+// }
+
+// var que=new Myqueue();
+// que.enqueue(10);
+// que.enqueue(20);
+// que.enqueue(30);
+// que.enqueue(40);
+// // que.disp();
+// que.dequeue();
+// // que.disp();
+// que.dequeue();
+// // que.dequeue();
+// que.isEmpty();
+// que.size();
+// // que.disp();
+// que.que_front();
+// que.que_rear();
+// // // que.size();
+
+
+
+
+var a=[1,2,3,4,5,6,7]
+
+var b=a.shift();
+console.log(b);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
