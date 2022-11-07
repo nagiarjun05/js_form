@@ -64,14 +64,22 @@ function deleteUser(e){
     e.preventDefault();
     // console.log(e.target.parentElement);
     if(e.target.classList.contains('dltbtn')){
-        // var li=e.target.parentElement;
+        // // var li=e.target.parentElement;
         userList.removeChild(e.target.parentElement);
         // var temp=li.childNodes[2].data;
         // var temp = li.childNodes[0];
         // console.log(temp);
-        console.log(e.target.parentElement.innerHTML.split(' ')[2])
-        localStorage.removeItem(e.target.parentElement.innerHTML.split(' ')[2]);    
+        // console.log(e.target.parentElement.innerHTML.split(' ')[2])
+        // localStorage.removeItem(e.target.parentElement.innerHTML.split(' ')[2]);    
         // localStorage.removeItem(`${temp}`);
+        // console.log(e.target.parentElement.id)
+        //axios.remove
+        axios({
+            method:'delete',
+            url:`https://crudcrud.com/api/ace6d6ea67804b4881993791ed5aa683/appointmentData/${e.target.parentElement.id}`
+          })
+          .then(res=>console.log(res))
+          .catch(err=>console.log(err));
 
     }
 }
@@ -80,32 +88,32 @@ function deleteUser(e){
 
 function showDetails(e){
     e.preventDefault();
-    Object.values(localStorage).forEach((value) => {
-        console.log(value)
-        // const fetchedDetails=JSON.parse(value)//localStorage.getItem(key));
-        let li=document.createElement('li');
-        li.className='user';
-        li.innerHTML=`${value} `;
-        // Object.values(fetchedDetails).forEach((value,index) => {
-        //     // console.log(fetchedDetails)
-        //     li.appendChild(document.createTextNode(`${value}`));
+    // Object.values(localStorage).forEach((value) => {
+    //     // console.log(value)
+    //     // const fetchedDetails=JSON.parse(value)//localStorage.getItem(key));
+    //     let li=document.createElement('li');
+    //     li.className='user';
+    //     li.innerHTML=`${value} `;
+    //     // Object.values(fetchedDetails).forEach((value,index) => {
+    //     //     // console.log(fetchedDetails)
+    //     //     li.appendChild(document.createTextNode(`${value}`));
         
         
-        var deleteButton=document.createElement('button');
-        deleteButton.className='dltbtn';
-        deleteButton.style.border='solid 3px red';
-        deleteButton.appendChild(document.createTextNode('Delete'));
-        li.appendChild(deleteButton);
+    //     var deleteButton=document.createElement('button');
+    //     deleteButton.className='dltbtn';
+    //     deleteButton.style.border='solid 3px red';
+    //     deleteButton.appendChild(document.createTextNode('Delete'));
+    //     li.appendChild(deleteButton);
          
-        var editButton=document.createElement('button');
-        editButton.className='editbtn';
-        editButton.style.border='solid 3px green';
-        editButton.appendChild(document.createTextNode('Edit'));
-        li.appendChild(editButton);
+    //     var editButton=document.createElement('button');
+    //     editButton.className='editbtn';
+    //     editButton.style.border='solid 3px green';
+    //     editButton.appendChild(document.createTextNode('Edit'));
+    //     li.appendChild(editButton);
 
-        userList.appendChild(li);
-    }
-    )
+    //     userList.appendChild(li);
+    // }
+    // )
 
     axios({
         method:'get',
@@ -114,7 +122,7 @@ function showDetails(e){
         let li=document.createElement('li');
         li.className='user';
         li.innerHTML=`${d.name} - ${d.emailId} `
-        // console.log(d.emailId)
+        
         var deleteButton=document.createElement('button');
         deleteButton.className='dltbtn';
         deleteButton.style.border='solid 3px red';
@@ -127,8 +135,9 @@ function showDetails(e){
         editButton.appendChild(document.createTextNode('Edit'));
         li.appendChild(editButton);
 
+        li.id=`${d._id}`;
+        console.log(li.id)
+        
         userList.appendChild(li);
     })).catch(err=>console.log(err));
-}   
-
-
+}
