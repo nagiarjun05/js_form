@@ -3,9 +3,6 @@ var userName=document.getElementById('form2');
 var userList=document.getElementById('users');
 var submit=document.getElementById('sb');
 var show=document.getElementById('shw');
-// console.log(userEmail);
-// console.log(userName.data);
-// console.log(submit);
 
 show.addEventListener('click', showDetails);
 submit.addEventListener('click', onClick);
@@ -18,10 +15,11 @@ function onClick(e){
         var li = document.createElement('li')
         li.className='user'
         // li.appendChild(document.createTextNode(userName.value+'  :  '+userEmail.value+'   '));
-        li.appendChild(document.createTextNode(userName.value));
-        li.appendChild(document.createTextNode('  '));
-        li.appendChild(document.createTextNode(userEmail.value));
-        li.appendChild(document.createTextNode('   '));
+        li.innerHTML=`${userName.value} - ${userEmail.value} `
+        // li.appendChild(document.createTextNode(userName.value));
+        // li.appendChild(document.createTextNode('  '));
+        // li.appendChild(document.createTextNode(userEmail.value));
+        // li.appendChild(document.createTextNode('   '));
         
         var deleteButton=document.createElement('button');
         deleteButton.className='dltbtn';
@@ -35,13 +33,7 @@ function onClick(e){
         editButton.appendChild(document.createTextNode('Edit'));
         li.appendChild(editButton);
 
-
-        let user= {
-            emailId:userEmail.value,
-            name:userName.value
-        }
-
-        localStorage.setItem(`user${userEmail.value}`,JSON.stringify(user))
+        localStorage.setItem(userEmail.value,`${userName.value} - ${userEmail.value}`)
         userList.appendChild(li);
     }
 }
@@ -49,8 +41,9 @@ function onClick(e){
 function editDetails(e){
     e.preventDefault();
     if (e.target.classList.contains('editbtn')){
-        userEmail.value=e.target.parentElement.childNodes[0].data
-        userName.value=e.target.parentElement.childNodes[1].data
+        // console.log(e.target.parentElement.innerHTML.split(' '));
+        userEmail.value=e.target.parentElement.innerHTML.split(' ')[0];
+        userName.value=e.target.parentElement.innerHTML.split(' ')[2];
         userList.removeChild(e.target.parentElement)
     }
 }
@@ -58,14 +51,15 @@ function editDetails(e){
 
 function deleteUser(e){
     e.preventDefault();
-    console.log(e.target.parentElement);
+    // console.log(e.target.parentElement);
     if(e.target.classList.contains('dltbtn')){
-        var li=e.target.parentElement;
-        userList.removeChild(li);
+        // var li=e.target.parentElement;
+        userList.removeChild(e.target.parentElement);
         // var temp=li.childNodes[2].data;
-        var temp = li.childNodes[0];
-        console.log(temp);
-        // localStorage.removeItem(`user${temp}`);
+        // var temp = li.childNodes[0];
+        // console.log(temp);
+        console.log(e.target.parentElement.innerHTML.split(' ')[2])
+        localStorage.removeItem(e.target.parentElement.innerHTML.split(' ')[2]);    
         // localStorage.removeItem(`${temp}`);
 
     }
@@ -76,14 +70,15 @@ function deleteUser(e){
 function showDetails(e){
     e.preventDefault();
     Object.values(localStorage).forEach((value) => {
-        const fetchedDetails=JSON.parse(value)//localStorage.getItem(key));
-        let li;
-        li = document.createElement('li')
-        li.className='user'
-        Object.values(fetchedDetails).forEach((value,index) => {
-            // console.log(fetchedDetails)
-            li.appendChild(document.createTextNode(`${value}`));
-        })
+        console.log(value)
+        // const fetchedDetails=JSON.parse(value)//localStorage.getItem(key));
+        let li=document.createElement('li');
+        li.className='user';
+        li.innerHTML=`${value} `;
+        // Object.values(fetchedDetails).forEach((value,index) => {
+        //     // console.log(fetchedDetails)
+        //     li.appendChild(document.createTextNode(`${value}`));
+        
         
         var deleteButton=document.createElement('button');
         deleteButton.className='dltbtn';
@@ -98,7 +93,9 @@ function showDetails(e){
         li.appendChild(editButton);
 
         userList.appendChild(li);
-    })
-}   
+    }
+    )
+}
+   
 
 
