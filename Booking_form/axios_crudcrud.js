@@ -9,8 +9,10 @@ submit.addEventListener('click', onClick);
 userList.addEventListener('click', deleteUser);
 userList.addEventListener('click', editDetails);
 
+var flag=true;
+
 function onClick(e){
-    if (userEmail.value!=''||userName.value!=''){
+    if (userEmail.value!=''||userName.value!=''||flag==true){
         e.preventDefault();
         var li = document.createElement('li')
         li.className='user'
@@ -46,16 +48,65 @@ function onClick(e){
             }
         }).then(res=>console.log(res)).catch(err=>console.log(err));
         userList.appendChild(li);
+    }else{
+        e.preventDefault();
+        var li = document.createElement('li')
+        li.className='user'
+        // li.appendChild(document.createTextNode(userName.value+'  :  '+userEmail.value+'   '));
+        li.innerHTML=`${userName.value} - ${userEmail.value} `
+        // li.appendChild(document.createTextNode(userName.value));
+        // li.appendChild(document.createTextNode('  '));
+        // li.appendChild(document.createTextNode(userEmail.value));
+        // li.appendChild(document.createTextNode('   '));
+        
+        var deleteButton=document.createElement('button');
+        deleteButton.className='dltbtn';
+        deleteButton.style.border='solid 3px red';
+        deleteButton.appendChild(document.createTextNode('Delete'));
+        li.appendChild(deleteButton);
+
+        var editButton=document.createElement('button');
+        editButton.className='editbtn';
+        editButton.style.border='solid 3px green';
+        editButton.appendChild(document.createTextNode('Edit'));
+        li.appendChild(editButton);
+    
+        localStorage.setItem(userEmail.value,`${userName.value} - ${userEmail.value}`)
+
+        
+
+        axios({
+            method:'patch',
+            url:`https://crudcrud.com/api/ace6d6ea67804b4881993791ed5aa683/appointmentData/`,
+            data:{
+                "name":`${userName.value} `,
+                "emailId":`${userEmail.value} `
+            }
+        }).then(res=>console.log(res)).catch(err=>console.log(err));
+        userList.appendChild(li);
+        flag=true;
     }
 }
 
 function editDetails(e){
     e.preventDefault();
+    flag=false;
     if (e.target.classList.contains('editbtn')){
         // console.log(e.target.parentElement.innerHTML.split(' '));
         userEmail.value=e.target.parentElement.innerHTML.split(' ')[0];
         userName.value=e.target.parentElement.innerHTML.split(' ')[2];
         userList.removeChild(e.target.parentElement)
+
+
+        axios({
+            method:'get',
+            url:`https://crudcrud.com/api/ace6d6ea67804b4881993791ed5aa683/appointmentData/${e.target.parentElement.id}`
+          })
+          .then(res=>{
+            userEmail.value=res.data.emailId;
+            userName.value=res.data.name;
+          })
+          .catch(err=>console.log(err));
     }
 }
 
