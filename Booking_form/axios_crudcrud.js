@@ -106,7 +106,29 @@ function showDetails(e){
         userList.appendChild(li);
     }
     )
-}
-   
+
+    axios({
+        method:'get',
+        url:'https://crudcrud.com/api/ace6d6ea67804b4881993791ed5aa683/appointmentData'
+    }).then(res=>res.data.forEach((d)=>{
+        let li=document.createElement('li');
+        li.className='user';
+        li.innerHTML=`${d.name} - ${d.emailId} `
+        // console.log(d.emailId)
+        var deleteButton=document.createElement('button');
+        deleteButton.className='dltbtn';
+        deleteButton.style.border='solid 3px red';
+        deleteButton.appendChild(document.createTextNode('Delete'));
+        li.appendChild(deleteButton);
+         
+        var editButton=document.createElement('button');
+        editButton.className='editbtn';
+        editButton.style.border='solid 3px green';
+        editButton.appendChild(document.createTextNode('Edit'));
+        li.appendChild(editButton);
+
+        userList.appendChild(li);
+    })).catch(err=>console.log(err));
+}   
 
 
