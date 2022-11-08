@@ -1,7 +1,7 @@
 var filled=document.getElementById("submit");
 var eAmount=document.getElementById("amount");
 var eDisc=document.getElementById("expense-type");
-var eCat=document.getElementById("expense-cat");
+var eCat=document.getElementById("expense-catogary");
 var expList=document.getElementById("exp-list");
 
 filled.addEventListener('click',onAdd);
@@ -38,6 +38,7 @@ function onAdd(e){
     e.preventDefault();
     var li = document.createElement('li');
     li.className='expenseDet';
+    console.log(eCat.value)
     li.innerHTML=`${eAmount.value} ${eDisc.value} ${eCat.value} `;    
     var deleteExpense=document.createElement('button');
     deleteExpense.className='dlt';
